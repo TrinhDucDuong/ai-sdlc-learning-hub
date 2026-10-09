@@ -1,3 +1,5 @@
+import { workbookLessons } from './workbooks.js';
+
 export const modules = [
   { id: "day1", label: "Buổi 01", title: "Tư duy & cộng tác", note: "Context xuyên suốt vòng đời" },
   { id: "day2", label: "Buổi 02", title: "Yêu cầu & thiết kế", note: "Đặc tả đủ rõ để thực thi" },
@@ -7,7 +9,7 @@ export const modules = [
   { id: "speckit", label: "Thực hành", title: "Spec Kit & MedBook", note: "Áp dụng trên codebase có sẵn" },
 ];
 
-export const lessons = [
+const coreLessons = [
   {
     id: "context", module: "day1", title: "AI trong toàn bộ SDLC", minutes: 9,
     intro: "Tốc độ viết code chỉ là một phần. Chất lượng bàn giao ngữ cảnh quyết định cả quy trình có đi nhanh hơn hay không.",
@@ -198,6 +200,11 @@ export const lessons = [
     source: "Bài capstone MedBook Day5: specs/001-weekly-slot-batches và source/test tương ứng."
   },
 ];
+
+export const lessons = modules.flatMap(m => [
+  ...coreLessons.filter(l => l.module === m.id),
+  ...workbookLessons.filter(l => l.module === m.id),
+]);
 
 export const glossary = [
   ["SDLC", "Software Development Life Cycle: vòng đời yêu cầu, thiết kế, phát triển, kiểm thử, triển khai và vận hành."],
